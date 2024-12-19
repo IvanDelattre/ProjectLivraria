@@ -15,6 +15,7 @@ public class ClienteService {
         return cliente;
     }
 
+    //todo regras de négocio
     public Cliente remover(int id ) {
         Cliente cliente = recuperarPorId(id) ;
         cliente = clienteDAO.remover(id) ;
@@ -31,5 +32,26 @@ public class ClienteService {
     }
 
 
+    public Cliente alterarNome(Cliente cliente , String nome){
+        cliente.setNome(nome);
+        return cliente;
+    }
 
-}
+    public Cliente alterarEmail(Cliente cliente , String email){
+        cliente.setEmail(email);
+        return cliente;
+    }
+
+    public Cliente alterarTelefone(Cliente cliente , String telefone) {
+        cliente.setTelefone(telefone);
+        return cliente;
+    }
+
+    public Cliente alterarCpf(Cliente cliente , String cpf) {
+        cliente.setCpf(cpf);
+        return cliente;
+    }
+
+
+
+    }
