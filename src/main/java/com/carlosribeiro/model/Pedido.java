@@ -3,38 +3,41 @@ package com.carlosribeiro.model;
 import com.carlosribeiro.util.Id;
 
 import java.util.Date;
+import java.util.List;
 
 public class Pedido {
     @Id
     private int id;
-    private Date data;
+    private Date dataEmissao;
     private Date dataCancelamento;
     private String status;
-    private ItemPedido itemPedido;
+    private List<ItemPedido> itensPedidos ;
 
-    public Pedido(int id, Date data) {
-        this.id = id;
-        this.data = data;
+    public Pedido(int id, Date dataEmissao ,List<ItemPedido> itensPedidos ) {
+        this.itensPedidos = itensPedidos;
+        this.dataEmissao = dataEmissao;
     }
-
 
     @Override
     public String toString() {
-        return "Pedido" +
+        return "Pedido{" +
                 "id=" + id +
-                ", data=" + data +
+                ", dataEmissao=" + dataEmissao +
                 ", dataCancelamento=" + dataCancelamento +
-                ", status=" + status +
-                ", itemPedido=" + itemPedido
-                ;
+                ", status='" + status + '\'' +
+                '}';
     }
 
     public int getId() {
         return id;
     }
 
-    public Date getData() {
-        return data;
+    public List<ItemPedido> getItensPedidos() {
+        return itensPedidos;
+    }
+
+    public Date getDataEmissao() {
+        return dataEmissao;
     }
 
     public Date getDataCancelamento() {
@@ -45,15 +48,18 @@ public class Pedido {
         return status;
     }
 
+    public void setDataEmissao(Date dataEmissao) {
+        this.dataEmissao = dataEmissao;
+    }
 
+    public void setItensPedidos(List<ItemPedido> itensPedidos) {
+        this.itensPedidos = itensPedidos;
+    }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
 
     public void setDataCancelamento(Date dataCancelamento) {
         this.dataCancelamento = dataCancelamento;
