@@ -12,8 +12,9 @@ public class Principal {
 
     public static void main(String[] args) {
         PrincipalLivro principalLivro= new PrincipalLivro();
+        PrincipalCliente principalCliente= new PrincipalCliente();
 
-        principalLivro.principal();
+        principalCliente.principal();
 
     }
 }

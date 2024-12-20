@@ -2,6 +2,7 @@ package com.carlosribeiro.model;
 
 import com.carlosribeiro.util.Id;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -21,15 +22,18 @@ public class Cliente {
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
+
+        this.pedidos = new ArrayList<>();
+        this.faturas = new ArrayList<>();
     }
 
     @Override
     public String toString() {
         return "Cliente" +
-                "cpf=" + cpf +
-                ", nome=" + nome +
-                ", email=" + email +
-                ", telefone=" + telefone;
+                "cpf = " + cpf +
+                ", nome = " + nome +
+                ", email = " + email +
+                ", telefone = " + telefone;
     }
 
     public int getId() {
