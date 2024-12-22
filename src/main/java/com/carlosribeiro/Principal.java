@@ -24,9 +24,6 @@ public class Principal {
 
         recuperarDados();
 
-
-
-
         boolean continua  = true;
         while (continua) {
             System.out.println('\n' + "========================================================");
@@ -73,24 +70,44 @@ public class Principal {
 
 
     }
-    private static void salvarDados(){
+    private static void salvarDados() {
         LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
+        ClienteDAO clienteDAO = FabricaDeDaos.getDAO(ClienteDAO.class);
+        // PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
+        // ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
 
-        Map<Integer , Livro> mapDeLivro = livroDAO.getMap();
+        Map<Integer, Livro> mapDeLivro = livroDAO.getMap();
         int contadorLivros = livroDAO.getContador();
 
-        try{
+        Map<Integer, Cliente> mapDeCliente = clienteDAO.getMap();
+        int contadorClientes = clienteDAO.getContador();
+
+        // Map<Integer, Pedido> mapDePedido = pedidoDAO.getMap();
+        // int contadorPedidos = pedidoDAO.getContador();
+
+        // Map<Integer, ItemPedido> mapDeItemPedido = itemPedidoDAO.getMap();
+        // int contadorItemPedidos = itemPedidoDAO.getContador();
+
+        try {
             FileOutputStream fos = new FileOutputStream("arquivo.dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
+
             oos.writeObject(mapDeLivro);
             oos.writeInt(contadorLivros);
 
-            oos.close();
+            oos.writeObject(mapDeCliente);
+            oos.writeInt(contadorClientes);
 
-        }catch(IOException e){
+            // oos.writeObject(mapDePedido);
+            // oos.writeInt(contadorPedidos);
+
+            // oos.writeObject(mapDeItemPedido);
+            // oos.writeInt(contadorItemPedidos);
+
+            oos.close();
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     private static void recuperarDados() {
@@ -104,12 +121,32 @@ public class Principal {
             Map<Integer, Livro> mapDeLivro = (Map<Integer, Livro>) ois.readObject();
             int contadorLivros = ois.readInt();
 
+            Map<Integer, Cliente> mapDeCliente = (Map<Integer, Cliente>) ois.readObject();
+            int contadorClientes = ois.readInt();
+
+            // Se houver outras entidades a serem recuperadas, mantenha a ordem correta de leitura
+            // Map<Integer, Pedido> mapDePedido = (Map<Integer, Pedido>) ois.readObject();
+            // int contadorPedidos = ois.readInt();
+
+            // Map<Integer, ItemPedido> mapDeItemPedido = (Map<Integer, ItemPedido>) ois.readObject();
+            // int contadorItemPedidos = ois.readInt();
 
             LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
+            ClienteDAO clienteDAO = FabricaDeDaos.getDAO(ClienteDAO.class);
+            // PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
+            // ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
 
             livroDAO.setMap(mapDeLivro);
             livroDAO.setContador(contadorLivros);
 
+            clienteDAO.setMap(mapDeCliente);
+            clienteDAO.setContador(contadorClientes);
+
+            // pedidoDAO.setMap(mapDePedido);
+            // pedidoDAO.setContador(contadorPedidos);
+
+            // itemPedidoDAO.setMap(mapDeItemPedido);
+            // itemPedidoDAO.setContador(contadorItemPedidos);
 
         } catch (FileNotFoundException e) {
             System.out.println("O arquivo não existe e será criado.");
@@ -128,6 +165,7 @@ public class Principal {
             }
         }
     }
+
 
 
 
