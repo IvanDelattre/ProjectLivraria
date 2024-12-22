@@ -19,7 +19,7 @@ public class ClienteService {
         return cliente;
     }
 
-    //todo regras de négocio
+
     public Cliente remover(int id ) {
         Cliente cliente = recuperarPorId(id) ;
         //remover se não tiver fatura ou pedidos ;

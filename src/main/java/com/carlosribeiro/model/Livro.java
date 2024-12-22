@@ -22,12 +22,13 @@ public class Livro {
 
     @Override
     public String toString() {
-        return "Livro" +
-                "isbn=" + isbn  +
-                ", titulo=" + titulo  +
-                ", descricao=" + descricao  +
-                ", qtdEstoque=" + qtdEstoque +
-                ", preco=" + preco;
+        return "Livro " +
+                "id = " + id +
+                " ,isbn = " + isbn  +
+                ", titulo = " + titulo  +
+                ", descricao = " + descricao  +
+                ", qtdEstoque = " + qtdEstoque +
+                ", preco = " + preco;
     }
 
     public int getId() {
@@ -73,4 +74,8 @@ public class Livro {
     public double getPreco() {
         return preco;
     }
+
+
+
+
 }
