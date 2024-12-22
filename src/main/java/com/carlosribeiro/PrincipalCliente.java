@@ -16,9 +16,9 @@ public class PrincipalCliente {
     String telefone;
     String email;
 
-    boolean continua = true;
-    public void principal(){
 
+    public void principal(){
+        boolean continua = true;
         while(continua){
             System.out.println('\n' + "========================================================");
             System.out.println('\n' + "O que você deseja fazer?");

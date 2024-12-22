@@ -5,6 +5,8 @@ import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.model.Pedido;
 import com.carlosribeiro.util.FabricaDeDaos;
 
+import java.util.List;
+
 public class PedidoService {
 
     PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
@@ -27,5 +29,10 @@ public class PedidoService {
         }
         return pedido;
     }
+
+    public List<Pedido> recuperarTodos(){
+        return pedidoDAO.recuperarTodos();
+    }
+
 
 }

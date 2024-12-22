@@ -10,10 +10,22 @@ public class ItemPedido {
     private double precoCobrado;
     private Livro livro;
 
+
     public ItemPedido(int qtdPedida, double precoCobrado, Livro livro) {
         this.qtdPedida = qtdPedida;
         this.precoCobrado = precoCobrado;
         this.livro = livro;
+    }
+
+
+    @Override
+    public String toString() {
+        return "ItemPedido " +
+                "id = " + id +
+                ", qtdPedida = " + qtdPedida +
+                ", precoCobrado = " + precoCobrado +
+                ", livro = " + livro +
+                '}';
     }
 
     public int getQtdAfaturar() {

@@ -1,7 +1,9 @@
 package com.carlosribeiro.service;
 
 
+import com.carlosribeiro.dao.ItemPedidoDAO;
 import com.carlosribeiro.dao.LivroDAO;
+import com.carlosribeiro.exception.EmUso;
 import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.model.*;
 import com.carlosribeiro.util.FabricaDeDaos;
@@ -51,6 +53,15 @@ public class LivroService{
         if(livro == null){
             throw new EntidadeNaoEncontradaException( "Livro inexistente");
         }
+        ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
+        List<ItemPedido> itemPedidos = itemPedidoDAO.recuperarTodos();
+        for (ItemPedido i : itemPedidos) {
+            if(livro.getId() == i.getLivro().getId()){
+                throw new EmUso("Livro asscoiado a pedido");
+            }
+        }
+
+
         livroDAO.remover(id) ;
         return livro;
     }

@@ -26,20 +26,22 @@ public class Pedido {
         DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
-    public Pedido( String dataEmissao , List<ItemPedido> itensPedidos ) throws DataInvalidaException{
+    public Pedido( String dataEmissao , List<ItemPedido> itensPedidos, Cliente cliente ) throws DataInvalidaException{
        setDataEmissao(dataEmissao);
        this.itensPedidos = itensPedidos;
        this.status = "n";
+       this.cliente = cliente;
     }
 
 
     @Override
     public String toString() {
-        return "Pedido" +
+        return "Pedido " +
                 "id = " + id +
                 ", dataEmissao = " + getDataAdmissaoMasc() +
                 ", status = " + status + '\'' +
-                ", dataCancelamento=" + (dataCancelamento != null ? getDataCancelamentoMasc() : "Não Cancelado") ;
+                ", dataCancelamento=" + (dataCancelamento != null ? getDataCancelamentoMasc() : "Não Cancelado")+
+                " ,Cliente = " + cliente.getNome();
     }
 
     public int getId() {

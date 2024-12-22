@@ -20,9 +20,9 @@ public class PrincipalLivro {
 
     Livro livro;
 
-    boolean continua = true;
-    public void principal(){
 
+    public void principal(){
+        boolean continua = true;
         while (continua){
 
             System.out.println('\n' + "========================================================");
@@ -40,9 +40,9 @@ public class PrincipalLivro {
                     isbn = Console.readLine("Informe o código do Livro: ");
                     titulo = Console.readLine("Informe o título do Livro: ");
                     descricao = Console.readLine("Informe a descrição do Livro: " );
-                    qtdEstoque = Console.readInt("Informe a quantidade de esroque") ;
+                    qtdEstoque = Console.readInt("Informe a quantidade de estoque: ") ;
 
-                    preco = Console.readDouble("Infome preçõ do Livro: ") ;
+                    preco = Console.readDouble("Infome preço do Livro: ") ;
 
                     livro = new Livro(isbn , titulo , descricao , qtdEstoque ,preco) ;
 
@@ -88,7 +88,7 @@ public class PrincipalLivro {
                             System.out.println("\n Descrição Alterada com suceeso!! \n" );
                         }
                         case 4 ->{
-                            preco = Console.readDouble("Digite novo preço" ) ;
+                            preco = Console.readDouble("Digite novo preço: " ) ;
                             livro.setPreco(preco);
                             livroService.alterarPreco(livro , preco) ;
 
