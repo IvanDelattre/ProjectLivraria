@@ -1,6 +1,7 @@
 package com.carlosribeiro;
 
 
+import com.carlosribeiro.exception.EmUso;
 import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.model.Livro;
 import com.carlosribeiro.service.LivroService;
@@ -113,7 +114,7 @@ public class PrincipalLivro {
                     try {
                         livroService.remover(id);
                         System.out.println("\nLivro Removido com sucesso!!\n");
-                    }catch (EntidadeNaoEncontradaException e ){
+                    }catch (EntidadeNaoEncontradaException | EmUso e ){
                         System.out.println('\n' + e.getMessage() );
                     }
                 }
