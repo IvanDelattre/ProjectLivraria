@@ -1,8 +1,12 @@
 package com.carlosribeiro.model;
 
+
+
 import com.carlosribeiro.util.Id;
 
-public class Livro {
+import java.io.Serializable;
+
+public class Livro implements Serializable {
     @Id
     private int id;
     private String isbn;

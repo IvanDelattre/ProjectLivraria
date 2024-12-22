@@ -3,13 +3,14 @@ package com.carlosribeiro.model;
 import com.carlosribeiro.exception.DataInvalidaException;
 import com.carlosribeiro.util.Id;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
-public class Fatura {
+public class Fatura implements Serializable {
     @Id
     //classe para faturar pedido;
     private int id;

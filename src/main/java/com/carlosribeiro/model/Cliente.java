@@ -2,11 +2,12 @@ package com.carlosribeiro.model;
 
 import com.carlosribeiro.util.Id;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Cliente {
+public class Cliente implements Serializable {
 
     @Id
     private int id;

@@ -2,7 +2,9 @@ package com.carlosribeiro.model;
 
 import com.carlosribeiro.util.Id;
 
-public class ItemPedido {
+import java.io.Serializable;
+
+public class ItemPedido implements Serializable {
     @Id
     private int id;
     private int qtdPedida;

@@ -1,6 +1,8 @@
 package com.carlosribeiro.model;
 
-public class ItemFaturado {
+import java.io.Serializable;
+
+public class ItemFaturado implements Serializable {
     public int id;
     private int qtdFaturada;
     private ItemPedido itemPedido;

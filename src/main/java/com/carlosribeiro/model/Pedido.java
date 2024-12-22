@@ -3,6 +3,7 @@ package com.carlosribeiro.model;
 import com.carlosribeiro.exception.DataInvalidaException;
 import com.carlosribeiro.util.Id;
 
+import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Pedido {
+public class Pedido implements Serializable {
     @Id
     private int id;
     private LocalDate dataEmissao;

@@ -5,14 +5,12 @@ import com.carlosribeiro.dao.ItemPedidoDAO;
 import com.carlosribeiro.dao.LivroDAO;
 import com.carlosribeiro.dao.PedidoDAO;
 import com.carlosribeiro.exception.DataInvalidaException;
-import com.carlosribeiro.model.Fatura;
-import com.carlosribeiro.model.ItemPedido;
-import com.carlosribeiro.model.Livro;
-import com.carlosribeiro.model.Pedido;
+import com.carlosribeiro.model.*;
 import com.carlosribeiro.util.FabricaDeDaos;
 import corejava.Console;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +22,10 @@ public class Principal {
         PrincipalCliente principalCliente= new PrincipalCliente();
         PrincipalPedido principalPedido= new PrincipalPedido();
 
-        //recuperarDados();
+        recuperarDados();
+
+
+
 
         boolean continua  = true;
         while (continua) {
@@ -57,7 +58,7 @@ public class Principal {
                 }
 
                 case 4 -> {
-                    //salvarDados();
+                    salvarDados();
                     continua = false;
                 }
 
@@ -71,6 +72,64 @@ public class Principal {
         }
 
 
-      }
+    }
+    private static void salvarDados(){
+        LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
+
+        Map<Integer , Livro> mapDeLivro = livroDAO.getMap();
+        int contadorLivros = livroDAO.getContador();
+
+        try{
+            FileOutputStream fos = new FileOutputStream("arquivo.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(mapDeLivro);
+            oos.writeInt(contadorLivros);
+
+            oos.close();
+
+        }catch(IOException e){
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    private static void recuperarDados() {
+        FileInputStream fis = null;
+        ObjectInputStream ois = null;
+
+        try {
+            fis = new FileInputStream("arquivo.dat");
+            ois = new ObjectInputStream(fis);
+
+            Map<Integer, Livro> mapDeLivro = (Map<Integer, Livro>) ois.readObject();
+            int contadorLivros = ois.readInt();
+
+
+            LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
+
+            livroDAO.setMap(mapDeLivro);
+            livroDAO.setContador(contadorLivros);
+
+
+        } catch (FileNotFoundException e) {
+            System.out.println("O arquivo não existe e será criado.");
+        } catch (IOException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                if (ois != null) {
+                    ois.close();
+                }
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                System.err.println("Erro ao fechar o stream: " + e.getMessage());
+            }
+        }
+    }
+
+
+
 
 }
