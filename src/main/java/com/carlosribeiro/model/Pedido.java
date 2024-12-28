@@ -17,7 +17,7 @@ public class Pedido implements Serializable {
     private int id;
     private LocalDate dataEmissao;
     private LocalDate dataCancelamento;
-    private String status;
+    private double status;
     private List<ItemPedido> itensPedidos ;
     private Cliente cliente;
 
@@ -30,7 +30,7 @@ public class Pedido implements Serializable {
     public Pedido( String dataEmissao , List<ItemPedido> itensPedidos, Cliente cliente ) throws DataInvalidaException{
        setDataEmissao(dataEmissao);
        this.itensPedidos = itensPedidos;
-       this.status = "n";
+       this.status = 0;
        this.cliente = cliente;
     }
 
@@ -42,6 +42,7 @@ public class Pedido implements Serializable {
                 ", dataEmissao = " + getDataAdmissaoMasc() +
                 ", status = " + status + '\'' +
                 ", dataCancelamento=" + (dataCancelamento != null ? getDataCancelamentoMasc() : "Não Cancelado")+
+                ", ItensPedidos = " + itensPedidos +
                 " ,Cliente = " + cliente.getNome();
     }
 
@@ -65,7 +66,7 @@ public class Pedido implements Serializable {
         return DTF.format(dataCancelamento);
     }
 
-    public String getStatus() {
+    public double getStatus() {
         return status;
     }
 
@@ -111,7 +112,7 @@ public class Pedido implements Serializable {
 
 
 
-    public void setStatus(String status) {
+    public void setStatus(double status) {
         this.status = status;
     }
 }

@@ -1,22 +1,34 @@
 package com.carlosribeiro.model;
 
+import com.carlosribeiro.util.Id;
+
 import java.io.Serializable;
 
 public class ItemFaturado implements Serializable {
+    @Id
     public int id;
-    private int qtdFaturada;
+    private double qtdFaturada;
     private ItemPedido itemPedido;
 
-    public ItemFaturado(int qtdFaturada, ItemPedido itemPedido) {
+    public ItemFaturado(double qtdFaturada, ItemPedido itemPedido) {
         this.qtdFaturada = qtdFaturada;
         this.itemPedido = itemPedido;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemFaturado{" +
+                "id=" + id +
+                ", qtdFaturada=" + qtdFaturada +
+                ", itemPedido=" + itemPedido +
+                '}';
     }
 
     public int getId() {
         return id;
     }
 
-    public int getQtdFaturada() {
+    public double getQtdFaturada() {
         return qtdFaturada;
     }
 

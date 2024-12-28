@@ -21,6 +21,7 @@ public class Principal {
         PrincipalLivro principalLivro= new PrincipalLivro();
         PrincipalCliente principalCliente= new PrincipalCliente();
         PrincipalPedido principalPedido= new PrincipalPedido();
+        PrincipalFatura principalFatura= new PrincipalFatura();
 
         recuperarDados();
 
@@ -31,7 +32,8 @@ public class Principal {
             System.out.println('\n' + "1. Tratar Livros");
             System.out.println("2. Tratar Clientes");
             System.out.println("3. Tratar Pedidos");
-            System.out.println("4. Sair");
+            System.out.println("4. Tratar Faturas");
+            System.out.println("5. Sair");
 
             int opcao = Console.readInt('\n' + "Digite um número entre 1 e 3:");
 
@@ -53,8 +55,11 @@ public class Principal {
                 case 3 -> {
                     principalPedido.principal();
                 }
+                case 4 ->{
+                    principalFatura.principal();
+                }
 
-                case 4 -> {
+                case 5 -> {
                     salvarDados();
                     continua = false;
                 }
@@ -73,8 +78,8 @@ public class Principal {
     private static void salvarDados() {
         LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
         ClienteDAO clienteDAO = FabricaDeDaos.getDAO(ClienteDAO.class);
-        // PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
-        // ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
+        PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
+        ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
 
         Map<Integer, Livro> mapDeLivro = livroDAO.getMap();
         int contadorLivros = livroDAO.getContador();
@@ -82,11 +87,11 @@ public class Principal {
         Map<Integer, Cliente> mapDeCliente = clienteDAO.getMap();
         int contadorClientes = clienteDAO.getContador();
 
-        // Map<Integer, Pedido> mapDePedido = pedidoDAO.getMap();
-        // int contadorPedidos = pedidoDAO.getContador();
+         Map<Integer, Pedido> mapDePedido = pedidoDAO.getMap();
+        int contadorPedidos = pedidoDAO.getContador();
 
-        // Map<Integer, ItemPedido> mapDeItemPedido = itemPedidoDAO.getMap();
-        // int contadorItemPedidos = itemPedidoDAO.getContador();
+        Map<Integer, ItemPedido> mapDeItemPedido = itemPedidoDAO.getMap();
+        int contadorItemPedidos = itemPedidoDAO.getContador();
 
         try {
             FileOutputStream fos = new FileOutputStream("arquivo.dat");
@@ -98,11 +103,11 @@ public class Principal {
             oos.writeObject(mapDeCliente);
             oos.writeInt(contadorClientes);
 
-            // oos.writeObject(mapDePedido);
-            // oos.writeInt(contadorPedidos);
+            oos.writeObject(mapDePedido);
+            oos.writeInt(contadorPedidos);
 
-            // oos.writeObject(mapDeItemPedido);
-            // oos.writeInt(contadorItemPedidos);
+            oos.writeObject(mapDeItemPedido);
+            oos.writeInt(contadorItemPedidos);
 
             oos.close();
         } catch (IOException e) {
@@ -125,16 +130,16 @@ public class Principal {
             int contadorClientes = ois.readInt();
 
             // Se houver outras entidades a serem recuperadas, mantenha a ordem correta de leitura
-            // Map<Integer, Pedido> mapDePedido = (Map<Integer, Pedido>) ois.readObject();
-            // int contadorPedidos = ois.readInt();
+            Map<Integer, Pedido> mapDePedido = (Map<Integer, Pedido>) ois.readObject();
+            int contadorPedidos = ois.readInt();
 
-            // Map<Integer, ItemPedido> mapDeItemPedido = (Map<Integer, ItemPedido>) ois.readObject();
-            // int contadorItemPedidos = ois.readInt();
+            Map<Integer, ItemPedido> mapDeItemPedido = (Map<Integer, ItemPedido>) ois.readObject();
+            int contadorItemPedidos = ois.readInt();
 
             LivroDAO livroDAO = FabricaDeDaos.getDAO(LivroDAO.class);
             ClienteDAO clienteDAO = FabricaDeDaos.getDAO(ClienteDAO.class);
-            // PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
-            // ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
+            PedidoDAO pedidoDAO = FabricaDeDaos.getDAO(PedidoDAO.class);
+            ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
 
             livroDAO.setMap(mapDeLivro);
             livroDAO.setContador(contadorLivros);
@@ -142,11 +147,11 @@ public class Principal {
             clienteDAO.setMap(mapDeCliente);
             clienteDAO.setContador(contadorClientes);
 
-            // pedidoDAO.setMap(mapDePedido);
-            // pedidoDAO.setContador(contadorPedidos);
+            pedidoDAO.setMap(mapDePedido);
+            pedidoDAO.setContador(contadorPedidos);
 
-            // itemPedidoDAO.setMap(mapDeItemPedido);
-            // itemPedidoDAO.setContador(contadorItemPedidos);
+            itemPedidoDAO.setMap(mapDeItemPedido);
+            itemPedidoDAO.setContador(contadorItemPedidos);
 
         } catch (FileNotFoundException e) {
             System.out.println("O arquivo não existe e será criado.");

@@ -17,7 +17,9 @@ public class Fatura implements Serializable {
     private LocalDate dataEmissao;
     private LocalDate dataCancelamento;
     private List<ItemFaturado> itensFaturados;
+    private Cliente cliente;
     private static final DateTimeFormatter DTF;
+
 
     static {
         DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -35,7 +37,8 @@ public class Fatura implements Serializable {
                 "id = " + id +
                 ", dataEmissao = " + getDataEmissaoMasc() +
                 ", dataCancelamento = "+  (dataCancelamento != null ? getDataCancelamentoMasc() : "Não cancelado") +
-                ", itensFaturados = " + itensFaturados ;
+                ", itensFaturados = " + itensFaturados +
+                ", cliente = " + cliente;
     }
 
     public int getId() {

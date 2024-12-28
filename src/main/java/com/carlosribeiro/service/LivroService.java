@@ -57,7 +57,7 @@ public class LivroService{
         List<ItemPedido> itemPedidos = itemPedidoDAO.recuperarTodos();
         for (ItemPedido i : itemPedidos) {
             if(livro.getId() == i.getLivro().getId()){
-                throw new EmUso("Livro asscoiado a pedido");
+                throw new EmUso("Error: Livro asscoiado a pedido");
             }
         }
 

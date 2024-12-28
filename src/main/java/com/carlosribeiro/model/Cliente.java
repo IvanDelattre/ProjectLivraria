@@ -31,10 +31,13 @@ public class Cliente implements Serializable {
     @Override
     public String toString() {
         return "Cliente " +
-                "cpf = " + cpf +
-                ", nome = " + nome +
-                ", email = " + email +
-                ", telefone = " + telefone;
+                " id= " + id +
+                ", cpf = " + cpf + '\'' +
+                ", nome = " + nome + '\'' +
+                ", email = " + email + '\'' +
+                ", telefone = " + telefone + '\'' +
+                ", pedidos = " + pedidos +
+                ", faturas = " + faturas ;
     }
 
     public int getId() {

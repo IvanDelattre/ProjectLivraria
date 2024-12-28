@@ -1,5 +1,6 @@
 package com.carlosribeiro;
 
+import com.carlosribeiro.exception.ClienteAssociadoException;
 import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
 import com.carlosribeiro.model.Cliente;
 import com.carlosribeiro.service.ClienteService;
@@ -93,7 +94,7 @@ public class PrincipalCliente {
                     try{
                         clienteService.remover(id);
                         System.out.println("\nCliente removido com sucesso!\n");
-                    }catch ( EntidadeNaoEncontradaException e ){
+                    }catch ( ClienteAssociadoException e ){
                         System.out.println( '\n' +  e.getMessage());
                     }
 
