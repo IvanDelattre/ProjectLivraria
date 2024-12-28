@@ -19,16 +19,18 @@ public class Fatura implements Serializable {
     private List<ItemFaturado> itensFaturados;
     private Cliente cliente;
     private static final DateTimeFormatter DTF;
-
+    private double totalFaturado;
 
     static {
         DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
 
-    public Fatura(String dataEmissao , List<ItemFaturado> itensFaturados) throws DataInvalidaException {
+    public Fatura(String dataEmissao , List<ItemFaturado> itensFaturados  ) throws DataInvalidaException {
         setDataEmissao(dataEmissao);
         this.itensFaturados = itensFaturados;
+
+
     }
 
     @Override
@@ -38,11 +40,20 @@ public class Fatura implements Serializable {
                 ", dataEmissao = " + getDataEmissaoMasc() +
                 ", dataCancelamento = "+  (dataCancelamento != null ? getDataCancelamentoMasc() : "Não cancelado") +
                 ", itensFaturados = " + itensFaturados +
+                ", toalFaturado = " + totalFaturado +
                 ", cliente = " + cliente;
     }
 
     public int getId() {
         return id;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public double getTotalFaturado() {
+        return totalFaturado;
     }
 
     public String getDataEmissaoMasc() {
@@ -85,6 +96,19 @@ public class Fatura implements Serializable {
               DateTimeException e) {
             throw new DataInvalidaException("Data inválida.");
         }
+    }
+
+
+    public void setTotalFaturado(){
+        for( ItemFaturado itemFaturado : itensFaturados){
+            totalFaturado += itemFaturado.getQtdFaturada() * itemFaturado.getItemPedido().getLivro().getPreco();
+        }
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+
+
     }
 
     public void setItensFaturados(List<ItemFaturado> itensFaturados) {

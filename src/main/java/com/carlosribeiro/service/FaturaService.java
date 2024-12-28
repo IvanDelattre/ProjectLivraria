@@ -57,8 +57,7 @@ public class FaturaService {
             if( itemPedido.getLivro().getQtdEstoque() >= itemPedido.getQtdAfaturar() ){
                 Livro livro = itemPedido.getLivro();
                 ItemFaturado itemFaturado = new ItemFaturado( itemPedido.getQtdAfaturar()   , itemPedido ) ;
-
-                //itemFaturadoDAO.incluir(itemFaturado); - incluir no DAO nop main
+                //itemFaturadoDAO.incluir(itemFaturado); - incluir no DAO no main
                 itensFaturados.add(itemFaturado);
 
                 //criar o item faturado e tirar do estoque sem complicações
@@ -82,7 +81,7 @@ public class FaturaService {
         //estoque de tudo era 0;
         if(itensFaturados.isEmpty() ){
             pedido.setStatus(0);
-            throw new ImpossivelFaturar("Sem nenhum estoque para Itens Pedidos , Fatira de pedido abortada") ;
+            throw new ImpossivelFaturar("Sem nenhum estoque para Itens Pedidos , Fatura de pedido abortada") ;
 
         }
 

@@ -33,7 +33,7 @@ public class PrincipalFatura {
     int idCliente;
     Pedido pedido;
     int idPedido;
-
+    Fatura fatura;
 
     public void principal(){
         boolean continua = true;
@@ -61,7 +61,10 @@ public class PrincipalFatura {
                         dataEmissao = Console.readLine("Digite data de emissão [dd/mm/yyyy]: ");
                         itensFaturados = faturaService.faturarPedido(itensFaturados , pedido) ;
 
-                        Fatura fatura = new Fatura(dataEmissao , itensFaturados) ;
+                        //todo levar essa parte para o DAO
+                        fatura = new Fatura(dataEmissao , itensFaturados   ) ;
+
+                        fatura.setTotalFaturado();
 
                         for(ItemFaturado itemFaturado : itensFaturados){
                             itemFaturadoDAO.incluir(itemFaturado);
@@ -69,7 +72,11 @@ public class PrincipalFatura {
 
                         faturaService.incluir(fatura);
                         pedido.getCliente().getFaturas().add(fatura);
-                        System.out.println("Pedido Faturado");
+                        //todo delimitando parte que vai para o DAO .
+
+
+                        System.out.println("Pedido Faturado!");
+
 
                     }catch(DataInvalidaException | ImpossivelFaturar | PedidoFaturado e   ){
                         System.out.println("\n" + e.getMessage());
@@ -78,6 +85,13 @@ public class PrincipalFatura {
 
 
                 }
+
+                case 2->{
+                    int idFatura = Console.readInt("Digite Id da fatura que deseja remover: ") ;
+
+
+                }
+
                 case 3 ->{
                     List<Fatura> faturas = faturaService.recuperarTodos() ;
                     for(Fatura fatura : faturas){

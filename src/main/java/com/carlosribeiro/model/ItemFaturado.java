@@ -17,11 +17,10 @@ public class ItemFaturado implements Serializable {
 
     @Override
     public String toString() {
-        return "ItemFaturado{" +
-                "id=" + id +
-                ", qtdFaturada=" + qtdFaturada +
-                ", itemPedido=" + itemPedido +
-                '}';
+        return "ItemFaturado" +
+                "id = " + id +
+                ", qtdFaturada = " + qtdFaturada +
+                ", itemPedido = " + itemPedido ;
     }
 
     public int getId() {
