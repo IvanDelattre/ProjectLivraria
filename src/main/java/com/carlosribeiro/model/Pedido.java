@@ -42,8 +42,8 @@ public class Pedido implements Serializable {
                 ", dataEmissao = " + getDataAdmissaoMasc() +
                 ", status = " + status + '\'' +
                 ", dataCancelamento=" + (dataCancelamento != null ? getDataCancelamentoMasc() : "Não Cancelado")+
-                ", ItensPedidos = " + itensPedidos +
-                " ,Cliente = " + cliente.getNome();
+                ",\nItensPedidos = " + itensPedidos +
+                " ,Cliente = " + cliente.getNome() + "\n";
     }
 
     public int getId() {

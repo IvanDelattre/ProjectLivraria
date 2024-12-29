@@ -29,8 +29,7 @@ public class ItemPedido implements Serializable {
                 ", qtdAfaturar = " + qtdAfaturar +
                 ", precoCobrado = " + precoCobrado +
                 ", livro = " + livro +
-                ", pedido = " + pedido +
-                '}';
+                ", pedido = " + pedido + "\n" ;
     }
 
     public int getQtdAfaturar() {

@@ -20,7 +20,7 @@ public class ItemFaturado implements Serializable {
         return "ItemFaturado" +
                 "id = " + id +
                 ", qtdFaturada = " + qtdFaturada +
-                ", itemPedido = " + itemPedido ;
+                ", itemPedido = " + itemPedido + "\n" ;
     }
 
     public int getId() {

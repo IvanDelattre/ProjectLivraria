@@ -61,7 +61,7 @@ public class PrincipalFatura {
                         //todo levar essa parte para o DAO
                         fatura = new Fatura(dataEmissao , itensFaturados , pedido  ) ;
 
-                        fatura.setTotalFaturado();
+
 
 
                         for(ItemFaturado itemFaturado : itensFaturados){
@@ -70,6 +70,7 @@ public class PrincipalFatura {
 
                         faturaService.incluir(fatura);
                         pedido.getCliente().getFaturas().add(fatura);
+                        fatura.setTotalFaturado();
                         //todo delimitando parte que vai para o DAO .
 
 

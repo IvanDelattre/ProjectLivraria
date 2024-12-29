@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class Fatura implements Serializable {
                 "id = " + id +
                 ", dataEmissao = " + getDataEmissaoMasc() +
                 ", dataCancelamento = "+  (dataCancelamento != null ? getDataCancelamentoMasc() : "Não cancelado") +
-                ", itensFaturados = " + itensFaturados +
+                ",\nitensFaturados = " + itensFaturados +
                 ", toalFaturado = " + totalFaturado +
-                ", cliente = " + cliente;
+                ", cliente = " + cliente + "\n";
     }
 
     public int getId() {
@@ -111,7 +112,25 @@ public class Fatura implements Serializable {
     public void setTotalFaturado(){
         for( ItemFaturado itemFaturado : itensFaturados){
             totalFaturado += itemFaturado.getQtdFaturada() * itemFaturado.getItemPedido().getLivro().getPreco();
+
         }
+
+        int cont = 0;
+        List<Fatura> faturas = pedido.getCliente().getFaturas() ;
+        for( Fatura fatura : faturas ){
+            System.out.println(fatura.getDataCancelamentoMasc());
+            if( fatura.getDataCancelamentoMasc() == null ){
+                cont += 1;
+            }
+        }
+
+
+        if( cont > 3){
+            System.out.println("\nO Valor Dessa Fatura tem desconto de 5%\n");;
+            totalFaturado *= 0.95 ;
+        }
+
+
     }
 
     public void setCliente(Cliente cliente) {

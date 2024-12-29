@@ -36,8 +36,8 @@ public class Cliente implements Serializable {
                 ", nome = " + nome + '\'' +
                 ", email = " + email + '\'' +
                 ", telefone = " + telefone + '\'' +
-                ", pedidos = " + pedidos +
-                ", faturas = " + faturas ;
+                ",\npedidos = "  +  pedidos + "\n" +
+                "faturas = " + faturas  + "\n";
     }
 
     public int getId() {

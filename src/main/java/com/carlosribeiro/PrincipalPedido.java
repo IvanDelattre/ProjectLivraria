@@ -66,7 +66,15 @@ public class PrincipalPedido {
                         try{
                             //todo modificar qtdAFaturar de ItemDePedido
                             Livro livro = livroService.recuperarPorId(id);
-                            int quantidade = Console.readInt("Digite quantidade do Livro Pedido: ");
+
+                            int quantidade ;
+                            do{
+                                 quantidade = Console.readInt("Digite quantidade do Livro Pedido: ");
+                                 if(quantidade < 0 || quantidade == 0) System.out.println("Quantidade pedida não pode ser 0 ou menor que 0");
+
+                            }while(quantidade < 0 || quantidade == 0  );
+
+
                             itemPedido = new ItemPedido(quantidade , livro.getPreco()  , livro);
                             itensPedidos.add(itemPedido);
 

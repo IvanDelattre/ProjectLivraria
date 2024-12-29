@@ -32,7 +32,7 @@ public class Livro implements Serializable {
                 ", titulo = " + titulo  +
                 ", descricao = " + descricao  +
                 ", qtdEstoque = " + qtdEstoque +
-                ", preco = " + preco;
+                ", preco = " + preco + "\n";
     }
 
     public int getId() {

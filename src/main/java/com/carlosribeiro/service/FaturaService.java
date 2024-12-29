@@ -25,13 +25,8 @@ public class FaturaService {
             throw new FaturaJaCancelada("Error: Essa fatura já foi cancelada") ;
         }
 
-        List<Pedido> pedidos = fatura.getPedido().getCliente().getPedidos() ;
-        int cont = 0 ;
-        for( Pedido p : pedidos  ){
-            if( p.getStatus() == 1 ) cont = cont + 1;
 
-        }
-        if( cont < 3 ) throw new ImpossivelFaturar("error : Cliente Deve Faturar completamente ao menos 3 pedidos  para remover uma fatura") ;
+        if( fatura.getPedido().getCliente().getFaturas().size() < 3 ) throw new ImpossivelFaturar("error : Cliente Deve Faturar  ao menos 3 pedidos  para remover uma fatura") ;
 
         try{
 
