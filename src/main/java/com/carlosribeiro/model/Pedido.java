@@ -59,10 +59,15 @@ public class Pedido implements Serializable {
     }
 
     public String getDataAdmissaoMasc() {
+
+
         return DTF.format(dataEmissao);
     }
 
     public String getDataCancelamentoMasc() {
+
+        if(dataCancelamento == null) return null ;
+
         return DTF.format(dataCancelamento);
     }
 

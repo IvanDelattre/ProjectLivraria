@@ -4,9 +4,7 @@ import com.carlosribeiro.dao.FaturaDAO;
 import com.carlosribeiro.dao.ItemFaturadoDAO;
 import com.carlosribeiro.dao.ItemPedidoDAO;
 import com.carlosribeiro.dao.PedidoDAO;
-import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
-import com.carlosribeiro.exception.ImpossivelFaturar;
-import com.carlosribeiro.exception.PedidoFaturado;
+import com.carlosribeiro.exception.*;
 import com.carlosribeiro.model.*;
 import com.carlosribeiro.util.FabricaDeDaos;
 
@@ -19,11 +17,39 @@ public class FaturaService {
         return faturaDAO.incluir(fatura);
     }
 
-    //todo adicionar regras de négocios
-    public Fatura remover(int id) {
+
+    public void remover(int id , String dataCancelamento) {
+
+        // todo Cliente  so  pode remover fatura depois de 3 faturas.
+
+
+        //todo verificar se a fatura já não esta cancelada
+
+        
         Fatura fatura = recuperarPorId(id);
-        fatura = faturaDAO.remover(id);
-        return fatura;
+        try{
+
+            fatura.setDataCancelamento( dataCancelamento );
+            fatura.getPedido().setStatus(0); // liberar pedido para ser faturado novamente ;
+            List<ItemFaturado> itemFaturados = fatura.getItensFaturados();
+
+            for(ItemFaturado i : itemFaturados) {
+                Livro livro = i.getItemPedido().getLivro() ;
+                int estoque = livro.getQtdEstoque();
+                livro.setQtdEstoque( estoque + i.getQtdFaturada()   );
+                int newQtdAFaturar = i.getQtdFaturada() + i.getItemPedido().getQtdAfaturar() ;
+                i.getItemPedido().setQtdAfaturar(  newQtdAFaturar     );
+                ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
+                itemFaturadoDAO.remover(i.getId()) ;
+            }
+
+            //fatura = faturaDAO.remover(id);
+
+        }catch (DataInvalidaException e){
+            System.out.println( '\n' + e.getMessage());
+        }
+
+
     }
 
 
@@ -42,6 +68,11 @@ public class FaturaService {
 
 
     public List<ItemFaturado> faturarPedido(List<ItemFaturado> itensFaturados ,Pedido pedido){
+
+        if( pedido.getDataCancelamentoMasc() != null ){
+            throw new PedidoCancelado("Pedido Cancelado: Impossível de faturar pedido") ;
+
+        }
 
         ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
 
@@ -87,8 +118,5 @@ public class FaturaService {
 
         return itensFaturados;
     }
-
-
-
 
 }

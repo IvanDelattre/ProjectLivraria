@@ -7,10 +7,10 @@ import java.io.Serializable;
 public class ItemFaturado implements Serializable {
     @Id
     public int id;
-    private double qtdFaturada;
+    private int qtdFaturada;
     private ItemPedido itemPedido;
 
-    public ItemFaturado(double qtdFaturada, ItemPedido itemPedido) {
+    public ItemFaturado(int qtdFaturada, ItemPedido itemPedido) {
         this.qtdFaturada = qtdFaturada;
         this.itemPedido = itemPedido;
     }
@@ -27,7 +27,7 @@ public class ItemFaturado implements Serializable {
         return id;
     }
 
-    public double getQtdFaturada() {
+    public int getQtdFaturada() {
         return qtdFaturada;
     }
 

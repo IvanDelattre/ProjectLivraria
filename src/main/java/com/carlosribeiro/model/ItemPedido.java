@@ -11,7 +11,7 @@ public class ItemPedido implements Serializable {
     private int qtdAfaturar;
     private double precoCobrado;
     private Livro livro;
-
+    Pedido pedido;
 
     public ItemPedido(int qtdPedida, double precoCobrado, Livro livro) {
         this.qtdPedida = qtdPedida;
@@ -29,6 +29,7 @@ public class ItemPedido implements Serializable {
                 ", qtdAfaturar = " + qtdAfaturar +
                 ", precoCobrado = " + precoCobrado +
                 ", livro = " + livro +
+                ", pedido = " + pedido +
                 '}';
     }
 
@@ -48,8 +49,14 @@ public class ItemPedido implements Serializable {
         return livro;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
 
 
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
 
     public void setQtdAfaturar(int qtdAfaturar) {
         this.qtdAfaturar = qtdAfaturar;

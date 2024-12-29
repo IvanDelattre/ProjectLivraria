@@ -21,15 +21,18 @@ public class Fatura implements Serializable {
     private static final DateTimeFormatter DTF;
     private double totalFaturado;
 
+
+    private Pedido pedido;
+
     static {
         DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
 
-    public Fatura(String dataEmissao , List<ItemFaturado> itensFaturados  ) throws DataInvalidaException {
+    public Fatura(String dataEmissao , List<ItemFaturado> itensFaturados , Pedido pedido ) throws DataInvalidaException {
         setDataEmissao(dataEmissao);
         this.itensFaturados = itensFaturados;
-
+        this.pedido = pedido;
 
     }
 
@@ -48,6 +51,10 @@ public class Fatura implements Serializable {
         return id;
     }
 
+    public Pedido getPedido() {
+        return pedido;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -61,6 +68,8 @@ public class Fatura implements Serializable {
     }
 
     public String getDataCancelamentoMasc() {
+        if(dataCancelamento == null)  return null ;
+
         return DTF.format(dataCancelamento) ;
     }
 

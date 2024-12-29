@@ -2,10 +2,7 @@ package com.carlosribeiro;
 
 import com.carlosribeiro.dao.FaturaDAO;
 import com.carlosribeiro.dao.ItemFaturadoDAO;
-import com.carlosribeiro.exception.DataInvalidaException;
-import com.carlosribeiro.exception.EntidadeNaoEncontradaException;
-import com.carlosribeiro.exception.ImpossivelFaturar;
-import com.carlosribeiro.exception.PedidoFaturado;
+import com.carlosribeiro.exception.*;
 import com.carlosribeiro.model.Cliente;
 import com.carlosribeiro.model.Fatura;
 import com.carlosribeiro.model.ItemFaturado;
@@ -62,7 +59,7 @@ public class PrincipalFatura {
                         itensFaturados = faturaService.faturarPedido(itensFaturados , pedido) ;
 
                         //todo levar essa parte para o DAO
-                        fatura = new Fatura(dataEmissao , itensFaturados   ) ;
+                        fatura = new Fatura(dataEmissao , itensFaturados , pedido  ) ;
 
                         fatura.setTotalFaturado();
 
@@ -75,10 +72,11 @@ public class PrincipalFatura {
                         //todo delimitando parte que vai para o DAO .
 
 
-                        System.out.println("Pedido Faturado!");
+
+                        System.out.println( "Pedido" +pedido.getId() +  "Faturado!");
 
 
-                    }catch(DataInvalidaException | ImpossivelFaturar | PedidoFaturado e   ){
+                    }catch(DataInvalidaException | ImpossivelFaturar | PedidoFaturado | PedidoCancelado e   ){
                         System.out.println("\n" + e.getMessage());
                         break ;
                     }
@@ -88,7 +86,14 @@ public class PrincipalFatura {
 
                 case 2->{
                     int idFatura = Console.readInt("Digite Id da fatura que deseja remover: ") ;
+                    try{
+                        String dataCancelamento = Console.readLine("Digite a Data de Cancelamento [dd/mm/yyyy]: ");
+                        faturaService.remover(idFatura, dataCancelamento) ;
+                        System.out.println("Fatura removida!");
 
+                    }catch(EntidadeNaoEncontradaException | ImpossivelRemoverFatura e){
+                        System.out.println("\n" + e.getMessage()) ;
+                    }
 
                 }
 
@@ -96,6 +101,7 @@ public class PrincipalFatura {
                     List<Fatura> faturas = faturaService.recuperarTodos() ;
                     for(Fatura fatura : faturas){
                         System.out.println(fatura);
+
                     }
 
                 }
@@ -104,12 +110,9 @@ public class PrincipalFatura {
                     continua = false;
                 }
 
-
                 default -> System.out.println("Opção inválida");
 
             }
-
-
 
 
         }
