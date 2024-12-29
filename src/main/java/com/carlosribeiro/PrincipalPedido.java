@@ -11,6 +11,7 @@ import com.carlosribeiro.service.ClienteService;
 import com.carlosribeiro.service.LivroService;
 import com.carlosribeiro.service.PedidoService;
 import com.carlosribeiro.util.FabricaDeDaos;
+import com.carlosribeiro.util.Tarefa;
 import corejava.Console;
 
 import java.util.ArrayList;
@@ -93,6 +94,11 @@ public class PrincipalPedido {
                             pedidoService.incluir(pedido); //inclui pedido no service
                             cliente.getPedidos().add(pedido); //pedido no list de cliente
                             System.out.println("Pedido " + pedido.getId() +  " cadastrado com sucesso!");
+
+                            //executar thread .
+                            Tarefa tarefa = new Tarefa(pedido.getCliente());
+                            tarefa.start();
+
 
                         }catch(DataInvalidaException e){
                             System.out.println('\n' + e.getMessage() + "Pedido descartado" );

@@ -38,7 +38,7 @@ public class PrincipalCliente {
                     nome = Console.readLine("Digite Nome: ");
                     telefone = Console.readLine("Digite Telefone: ");
                     email = Console.readLine("Digite E-mail: ");
-                    Cliente cliente = new Cliente(cpf , nome, telefone, email);
+                    Cliente cliente = new Cliente(cpf , nome, email, telefone );
                     clienteService.incluir(cliente);
                     System.out.println("\nCliente número " + cliente.getId() + " cadastrado com sucesso!");
                 }

@@ -85,7 +85,7 @@ public class FaturaService {
     public List<ItemFaturado> faturarPedido(List<ItemFaturado> itensFaturados ,Pedido pedido){
 
         if( pedido.getDataCancelamentoMasc() != null ){
-            throw new PedidoCancelado("Pedido Cancelado: Impossível de faturar pedido") ;
+            throw new PedidoCancelado("Pedido Cancelado: Impossível faturar pedido") ;
 
         }
         //todo:  se pedido já possui fatura , procurar a fatura já existente
