@@ -20,13 +20,19 @@ public class FaturaService {
 
     public void remover(int id , String dataCancelamento) {
 
-        // todo Cliente  so  pode remover fatura depois de 3 faturas.
-
-
-        //todo verificar se a fatura já não esta cancelada
-
-        
         Fatura fatura = recuperarPorId(id);
+        if(fatura.getDataCancelamentoMasc() != null ) {
+            throw new FaturaJaCancelada("Error: Essa fatura já foi cancelada") ;
+        }
+
+        List<Pedido> pedidos = fatura.getPedido().getCliente().getPedidos() ;
+        int cont = 0 ;
+        for( Pedido p : pedidos  ){
+            if( p.getStatus() == 1 ) cont = cont + 1;
+
+        }
+        if( cont < 3 ) throw new ImpossivelFaturar("error : Cliente Deve Faturar completamente ao menos 3 pedidos  para remover uma fatura") ;
+
         try{
 
             fatura.setDataCancelamento( dataCancelamento );
@@ -39,9 +45,18 @@ public class FaturaService {
                 livro.setQtdEstoque( estoque + i.getQtdFaturada()   );
                 int newQtdAFaturar = i.getQtdFaturada() + i.getItemPedido().getQtdAfaturar() ;
                 i.getItemPedido().setQtdAfaturar(  newQtdAFaturar     );
+
+                //exclusão em DAO correta
                 ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
                 itemFaturadoDAO.remover(i.getId()) ;
+
+
+
             }
+
+            //exclusão de itens faturados.
+            fatura.getItensFaturados().clear();
+
 
             //fatura = faturaDAO.remover(id);
 
@@ -73,7 +88,7 @@ public class FaturaService {
             throw new PedidoCancelado("Pedido Cancelado: Impossível de faturar pedido") ;
 
         }
-
+        //todo:  se pedido já possui fatura , procurar a fatura já existente
         ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
 
         if(pedido.getStatus() == 1 ){

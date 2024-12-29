@@ -1,9 +1,6 @@
 package com.carlosribeiro;
 
-import com.carlosribeiro.dao.ClienteDAO;
-import com.carlosribeiro.dao.ItemPedidoDAO;
-import com.carlosribeiro.dao.LivroDAO;
-import com.carlosribeiro.dao.PedidoDAO;
+import com.carlosribeiro.dao.*;
 import com.carlosribeiro.exception.DataInvalidaException;
 import com.carlosribeiro.model.*;
 import com.carlosribeiro.util.FabricaDeDaos;
@@ -34,6 +31,7 @@ public class Principal {
             System.out.println("3. Tratar Pedidos");
             System.out.println("4. Tratar Faturas");
             System.out.println("5. Sair");
+            System.out.println("6. Testar itemFaturado");
 
             int opcao = Console.readInt('\n' + "Digite um número entre 1 e 3:");
 
@@ -63,6 +61,17 @@ public class Principal {
                     salvarDados();
                     continua = false;
                 }
+
+
+                case 6 ->{
+                    ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
+                    List<ItemFaturado> lista = itemFaturadoDAO.recuperarTodos();
+                    for( ItemFaturado i : lista) {
+                        System.out.println(i);
+                    }
+
+                }
+
 
                 default -> System.out.println('\n' + "Opção inválida!");
             }

@@ -63,6 +63,7 @@ public class PrincipalFatura {
 
                         fatura.setTotalFaturado();
 
+
                         for(ItemFaturado itemFaturado : itensFaturados){
                             itemFaturadoDAO.incluir(itemFaturado);
                         }
@@ -73,7 +74,7 @@ public class PrincipalFatura {
 
 
 
-                        System.out.println( "Pedido" +pedido.getId() +  "Faturado!");
+                        System.out.println( "Pedido " +pedido.getId() +  " Faturado!");
 
 
                     }catch(DataInvalidaException | ImpossivelFaturar | PedidoFaturado | PedidoCancelado e   ){
@@ -91,7 +92,7 @@ public class PrincipalFatura {
                         faturaService.remover(idFatura, dataCancelamento) ;
                         System.out.println("Fatura removida!");
 
-                    }catch(EntidadeNaoEncontradaException | ImpossivelRemoverFatura e){
+                    }catch(EntidadeNaoEncontradaException |  ImpossivelFaturar   | FaturaJaCancelada e){
                         System.out.println("\n" + e.getMessage()) ;
                     }
 
