@@ -68,11 +68,7 @@ public class Principal {
                 default -> System.out.println('\n' + "Opção inválida!");
             }
         }
-        ItemPedidoDAO itemPedidoDAO = FabricaDeDaos.getDAO(ItemPedidoDAO.class);
-        List<ItemPedido> intens = itemPedidoDAO.recuperarTodos();
-        for (ItemPedido itemPedido : intens) {
-            System.out.println(itemPedido);
-        }
+        
 
 
     }

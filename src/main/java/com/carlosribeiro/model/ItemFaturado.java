@@ -17,7 +17,7 @@ public class ItemFaturado implements Serializable {
 
     @Override
     public String toString() {
-        return "ItemFaturado" +
+        return "ItemFaturado " +
                 "id = " + id +
                 ", qtdFaturada = " + qtdFaturada +
                 ", itemPedido = " + itemPedido + "\n" ;

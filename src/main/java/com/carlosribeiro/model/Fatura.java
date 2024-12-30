@@ -118,7 +118,7 @@ public class Fatura implements Serializable {
         int cont = 0;
         List<Fatura> faturas = pedido.getCliente().getFaturas() ;
         for( Fatura fatura : faturas ){
-            System.out.println(fatura.getDataCancelamentoMasc());
+
             if( fatura.getDataCancelamentoMasc() == null ){
                 cont += 1;
             }
