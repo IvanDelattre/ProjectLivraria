@@ -20,6 +20,8 @@ public class Principal {
         PrincipalPedido principalPedido= new PrincipalPedido();
         PrincipalFatura principalFatura= new PrincipalFatura();
 
+        PrincipalRelatorio principalRelatorio = new PrincipalRelatorio();
+
         recuperarDados();
 
         boolean continua  = true;
@@ -30,7 +32,8 @@ public class Principal {
             System.out.println("2. Tratar Clientes");
             System.out.println("3. Tratar Pedidos");
             System.out.println("4. Tratar Faturas");
-            System.out.println("5. Sair");
+            System.out.println("5. Tratar Relatórios");
+            System.out.println("6. Sair");
 
 
             int opcao = Console.readInt('\n' + "Digite um número entre 1 e 3:");
@@ -57,18 +60,19 @@ public class Principal {
                     principalFatura.principal();
                 }
 
-                case 5 -> {
+                case 6 -> {
                     salvarDados();
                     continua = false;
                 }
 
-
-
+                case 5 ->{
+                    principalRelatorio.principal();
+                }
 
                 default -> System.out.println('\n' + "Opção inválida!");
             }
         }
-        
+
 
 
     }

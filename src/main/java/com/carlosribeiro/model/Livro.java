@@ -14,6 +14,8 @@ public class Livro implements Serializable {
     private String descricao;
     private int qtdEstoque ;
     private double preco;
+    //atributo utilizado para fazer relatórios
+    private double qtdFaturadoNoMes = 0 ;
 
     public Livro(String isbn, String titulo , String descricao , int qtdEstoque , double preco ){
         this.isbn = isbn;
@@ -37,6 +39,10 @@ public class Livro implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    public double getQtdFaturadoNoMes() {
+        return qtdFaturadoNoMes;
     }
 
     public void setIsbn(String isbn) {
@@ -80,6 +86,11 @@ public class Livro implements Serializable {
     }
 
 
+    public void addQtdFaturadoNoMes(double qtdFaturadoNoMes) {
+        this.qtdFaturadoNoMes += qtdFaturadoNoMes;
+    }
 
-
+    public void setQtdFaturadoNoMes(double qtdFaturadoNoMes) {
+        this.qtdFaturadoNoMes = qtdFaturadoNoMes;
+    }
 }
