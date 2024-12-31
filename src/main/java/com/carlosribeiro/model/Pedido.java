@@ -116,7 +116,6 @@ public class Pedido implements Serializable {
 
 
 
-
     public void setStatus(double status) {
         this.status = status;
     }

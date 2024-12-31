@@ -16,7 +16,7 @@ public class PrincipalCliente {
     String nome;
     String telefone;
     String email;
-
+    String endereco;
 
     public void principal(){
         boolean continua = true;
@@ -38,7 +38,8 @@ public class PrincipalCliente {
                     nome = Console.readLine("Digite Nome: ");
                     telefone = Console.readLine("Digite Telefone: ");
                     email = Console.readLine("Digite E-mail: ");
-                    Cliente cliente = new Cliente(cpf , nome, email, telefone );
+                    endereco = Console.readLine("Digite Endereco: ");
+                    Cliente cliente = new Cliente(cpf , nome, email, telefone  , endereco);
                     clienteService.incluir(cliente);
                     System.out.println("\nCliente número " + cliente.getId() + " cadastrado com sucesso!");
                 }
@@ -57,7 +58,7 @@ public class PrincipalCliente {
                     System.out.println("2.Nome");
                     System.out.println("3.Email");
                     System.out.println("4.Telefone");
-
+                    System.out.println("5.Endereco");
 
                     int opcaoAlteracao = Console.readInt("\nDigite Operacao: ") ;
                     switch(opcaoAlteracao){
@@ -83,6 +84,13 @@ public class PrincipalCliente {
                             System.out.println("\nCliente alterado com sucesso!\n");
 
                         }
+
+                        case 5 ->{
+                            endereco = Console.readLine("Digite novo endereco: ");
+                            clienteService.alterarEndereco(cliente , endereco) ;
+                            System.out.println("\nCliente alterado com sucesso!\n");
+                        }
+
                         default -> System.out.println('\n' + "Opção inválida!");
                     }
 

@@ -51,7 +51,6 @@ public class FaturaService {
             fatura.getItensFaturados().clear();
 
 
-            //fatura = faturaDAO.remover(id);
 
         }catch (DataInvalidaException e){
             System.out.println( '\n' + e.getMessage());
@@ -81,7 +80,7 @@ public class FaturaService {
             throw new PedidoCancelado("Pedido Cancelado: Impossível faturar pedido") ;
 
         }
-        
+
         ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
 
         if(pedido.getStatus() == 1 ){

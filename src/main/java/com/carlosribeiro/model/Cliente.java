@@ -17,13 +17,14 @@ public class Cliente implements Serializable {
     private String telefone;
     private List<Pedido> pedidos;
     private List<Fatura> faturas ;
+    private String endereco;
 
-    public Cliente(String cpf, String nome, String email, String telefone) {
+    public Cliente(String cpf, String nome, String email, String telefone , String endereco) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
-
+        this.endereco = endereco;
         this.pedidos = new ArrayList<>();
         this.faturas = new ArrayList<>();
     }
@@ -35,6 +36,7 @@ public class Cliente implements Serializable {
                 ", cpf = " + cpf + '\'' +
                 ", nome = " + nome + '\'' +
                 ", email = " + email + '\'' +
+                ", endereço = " + endereco + '\'' +
                 ", telefone = " + telefone + '\'' +
                 ",\npedidos = "  +  pedidos + "\n" +
                 "faturas = " + faturas  + "\n";
@@ -94,5 +96,7 @@ public class Cliente implements Serializable {
         this.pedidos = pedidos;
     }
 
-
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 }

@@ -52,6 +52,13 @@ public class ClienteService {
         return cliente;
     }
 
+
+    public Cliente alterarEndereco(Cliente cliente , String endereco){
+        cliente.setEndereco(endereco);
+        return cliente;
+    }
+
+
     public Cliente alterarEmail(Cliente cliente , String email){
         cliente.setEmail(email);
         return cliente;
