@@ -18,9 +18,9 @@ public class FaturaService {
     }
 
 
-    public void remover(int id , String dataCancelamento) {
+    public void remover(Fatura fatura , String dataCancelamento) {
 
-        Fatura fatura = recuperarPorId(id);
+
         if(fatura.getDataCancelamentoMasc() != null ) {
             throw new FaturaJaCancelada("Error: Essa fatura já foi cancelada") ;
         }
@@ -84,7 +84,7 @@ public class FaturaService {
         ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
 
         if(pedido.getStatus() == 1 ){
-            throw new PedidoFaturado("Pedido Completamente Faturado") ;
+            throw new PedidoFaturado("Error : Pedido Completamente Faturado") ;
         }
         pedido.setStatus(1); //
         List<ItemPedido> itensPedidos = pedido.getItensPedidos();

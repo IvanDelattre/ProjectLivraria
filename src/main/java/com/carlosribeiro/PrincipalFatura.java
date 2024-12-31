@@ -56,11 +56,12 @@ public class PrincipalFatura {
                     }
                     try{
                         dataEmissao = Console.readLine("Digite data de emissão [dd/mm/yyyy]: ");
-                        itensFaturados = faturaService.faturarPedido(itensFaturados , pedido) ;
+                        //itensFaturados =
 
                         //todo levar essa parte para o DAO
                         fatura = new Fatura(dataEmissao , itensFaturados , pedido  ) ;
-
+                        //pedido só é alterado caso a data seja válida -
+                        fatura.setItensFaturados(  faturaService.faturarPedido(itensFaturados , pedido)   );
 
 
 
@@ -89,9 +90,11 @@ public class PrincipalFatura {
                 case 2->{
                     int idFatura = Console.readInt("Digite Id da fatura que deseja remover: ") ;
                     try{
+                        fatura = faturaService.recuperarPorId(idFatura);
                         String dataCancelamento = Console.readLine("Digite a Data de Cancelamento [dd/mm/yyyy]: ");
-                        faturaService.remover(idFatura, dataCancelamento) ;
-                        System.out.println("Fatura removida!");
+                        faturaService.remover(fatura , dataCancelamento) ;
+
+                        if(fatura.getDataCancelamentoMasc() != null )  System.out.println("Fatura removida!");
 
                     }catch(EntidadeNaoEncontradaException |  ImpossivelFaturar   | FaturaJaCancelada e){
                         System.out.println("\n" + e.getMessage()) ;

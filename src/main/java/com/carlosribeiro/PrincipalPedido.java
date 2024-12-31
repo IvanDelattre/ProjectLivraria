@@ -28,7 +28,7 @@ public class PrincipalPedido {
     Cliente cliente;
     Pedido pedido;
     ItemPedido itemPedido;
-
+    String enderecoEntrega ;
     String dataEmissao;
     String dataCancelamento;
     int id;
@@ -94,7 +94,8 @@ public class PrincipalPedido {
                     if(!itensPedidos.isEmpty()){
                         try{
                             dataEmissao = Console.readLine("Digite data de emissão [dd/mm/yyyy]: ");
-                            pedido = new Pedido(dataEmissao , itensPedidos , cliente);
+                            enderecoEntrega = Console.readLine("Digite edereço de entrega: ");
+                            pedido = new Pedido(dataEmissao , itensPedidos , cliente , enderecoEntrega);
                             for(ItemPedido i : itensPedidos){
                                 itemPedidoDAO.incluir(i);
                             }

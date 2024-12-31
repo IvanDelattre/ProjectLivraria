@@ -21,17 +21,20 @@ public class Pedido implements Serializable {
     private List<ItemPedido> itensPedidos ;
     private Cliente cliente;
 
+    private String enderecoEntrega;
+
     private static final DateTimeFormatter DTF;
 
     static {
         DTF = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     }
 
-    public Pedido( String dataEmissao , List<ItemPedido> itensPedidos, Cliente cliente ) throws DataInvalidaException{
+    public Pedido( String dataEmissao , List<ItemPedido> itensPedidos, Cliente cliente , String enderecoEntrega ) throws DataInvalidaException{
        setDataEmissao(dataEmissao);
        this.itensPedidos = itensPedidos;
        this.status = 0;
        this.cliente = cliente;
+       this.enderecoEntrega = enderecoEntrega;
     }
 
 
