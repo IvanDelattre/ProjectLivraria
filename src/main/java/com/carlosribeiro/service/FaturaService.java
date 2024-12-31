@@ -45,8 +45,6 @@ public class FaturaService {
                 ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
                 itemFaturadoDAO.remover(i.getId()) ;
 
-
-
             }
 
             //exclusão de itens faturados.
@@ -83,7 +81,7 @@ public class FaturaService {
             throw new PedidoCancelado("Pedido Cancelado: Impossível faturar pedido") ;
 
         }
-        //todo:  se pedido já possui fatura , procurar a fatura já existente
+        
         ItemFaturadoDAO itemFaturadoDAO = FabricaDeDaos.getDAO(ItemFaturadoDAO.class);
 
         if(pedido.getStatus() == 1 ){

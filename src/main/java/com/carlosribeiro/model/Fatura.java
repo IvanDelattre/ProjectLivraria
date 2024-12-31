@@ -44,8 +44,7 @@ public class Fatura implements Serializable {
                 ", dataEmissao = " + getDataEmissaoMasc() +
                 ", dataCancelamento = "+  (dataCancelamento != null ? getDataCancelamentoMasc() : "Não cancelado") +
                 ",\nitensFaturados = " + itensFaturados +
-                ", toalFaturado = " + totalFaturado +
-                ", cliente = " + cliente + "\n";
+                ", toalFaturado = " + totalFaturado +  "\n";
     }
 
     public int getId() {

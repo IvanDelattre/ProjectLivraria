@@ -103,7 +103,7 @@ public class PrincipalRelatorio {
                         for (Livro livroFaturado : livrosFaturados) {
                             if (livroTotal.getId() == livroFaturado.getId()) {
                                 iterator.remove();
-                                break; 
+                                break;
                             }
                         }
                     }
